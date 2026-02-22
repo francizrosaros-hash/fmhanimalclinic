@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin Dashboard{% endblock %} — FMHSYNC</title>
+  <link rel="icon" type="image/png" href="{% static 'image/fmh-logo.png' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/portal.css' %}">
+</head>
+<body>
+
+<div class="portal-wrapper" id="portalWrapper">
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- ====== TOP NAVBAR (full width) ====== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class='bx bx-menu'></i>
+      </button>
+      <a href="{% url 'admin_dashboard' %}" class="topbar-logo">
+        <img src="{% static 'image/fmh-logo.png' %}" alt="FMH Logo">
+        <span>FMHSYNC</span>
+      </a>
+    </div>
+
+    <div class="topbar-center">
+      <a href="#" class="topbar-pos-btn">
+        <i class='bx bx-store'></i> POS
+      </a>
+    </div>
+
+    <div class="topbar-right">
+      <div class="portal-switcher">
+        <a href="{% url 'user_dashboard' %}" class="portal-switch-btn" title="User Portal">
+          <i class='bx bx-user'></i><span>User</span>
+        </a>
+        <a href="{% url 'admin_dashboard' %}" class="portal-switch-btn active" title="Admin Portal">
+          <i class='bx bx-shield-alt'></i><span>Admin</span>
+        </a>
+      </div>
+      <span class="topbar-portal-divider"></span>
+      <a href="{% url 'landing_page' %}" class="topbar-icon-btn" title="Home">
+        <i class='bx bx-home-alt'></i>
+      </a>
+      <button class="topbar-icon-btn" title="Notifications">
+        <i class='bx bx-bell'></i>
+        <span class="notif-dot"></span>
+      </button>
+      <button class="topbar-icon-btn" title="Theme">
+        <i class='bx bx-sun'></i>
+      </button>
+      <div class="topbar-profile" title="{{ user.get_full_name|default:user.username }}">
+        <div class="topbar-avatar">
+          {{ user.first_name|default:user.username|make_list|first|upper }}
+        </div>
+        <span class="topbar-name">{{ user.get_full_name|default:user.username }}</span>
+        <i class='bx bx-chevron-down topbar-chevron'></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== LEFT SIDEBAR ====== -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a href="{% url 'admin_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+        <i class='bx bx-dashboard'></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-calendar-check'></i><span>Appointments</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bxs-dog'></i><span>Patients</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-file'></i><span>Records</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-wallet'></i><span>Finance</span>
+        <span class="submenu-arrow"><i class='bx bx-chevron-right'></i></span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-bell'></i><span>Notifications</span>
+        <span class="badge">5</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-group'></i><span>Staff</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-cog'></i><span>Settings</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-package'></i><span>Inventory</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-brain'></i><span>AI Diagnostics</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <i class='bx bx-building-house'></i><span>Branches</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="{% url 'logout' %}" class="sidebar-link">
+        <i class='bx bx-log-out'></i><span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ====== CONTENT ====== -->
+  <main class="portal-content">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<script>
+  const wrapper = document.getElementById('portalWrapper');
+  const toggle = document.getElementById('sidebarToggle');
+  const overlay = document.getElementById('mobileOverlay');
+  toggle && toggle.addEventListener('click', () => wrapper.classList.toggle('mobile-open'));
+  overlay && overlay.addEventListener('click', () => wrapper.classList.remove('mobile-open'));
+</script>
+</body>
+</html>

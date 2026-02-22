@@ -21,8 +21,22 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('frontend.urls')),
+
+    # Public-facing pages
+    path('', include('landing.urls')),
+
+    # App URLs
     path('accounts/', include('accounts.urls')),
+    path('branches/', include('branches.urls')),
+    path('patients/', include('patients.urls')),
+    path('appointments/', include('appointments.urls')),
+    path('records/', include('records.urls')),
+    path('inventory/', include('inventory.urls')),
+    path('billing/', include('billing.urls')),
+    path('diagnostics/', include('diagnostics.urls')),
+    path('employees/', include('employees.urls')),
+    path('notifications/', include('notifications.urls')),
+    path('reports/', include('reports.urls')),
 ]
 
 # Serve static and media files in development

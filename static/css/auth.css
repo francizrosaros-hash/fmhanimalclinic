@@ -717,3 +717,39 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
+
+/* ================================================================
+   12. AUTH MESSAGES (Django messages)
+   ================================================================ */
+.auth-messages {
+  margin-bottom: 1rem;
+}
+
+.auth-message {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.auth-message i {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.auth-message.error {
+  background: #fff5f5;
+  color: #e63946;
+  border: 1px solid #fecdd3;
+}
+
+.auth-message.success {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+

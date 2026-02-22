@@ -1,0 +1,314 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ============================================
+     REGISTER PAGE
+     ============================================ -->
+<section class="auth-page auth-register">
+  <!-- Background Decorations -->
+  <div class="auth-bg-shapes">
+    <div class="auth-shape auth-shape-1"></div>
+    <div class="auth-shape auth-shape-2"></div>
+    <div class="auth-shape auth-shape-3"></div>
+  </div>
+
+  <div class="auth-container">
+    <!-- Left Side: Branding -->
+    <div class="auth-branding">
+      <!-- Scattered static paw prints -->
+      <span class="auth-paw-scatter" style="top:5%;left:10%;font-size:9rem;opacity:0.18;transform:rotate(25deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:18%;left:65%;font-size:7rem;opacity:0.15;transform:rotate(-35deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:36%;left:4%;font-size:10rem;opacity:0.14;transform:rotate(50deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:50%;left:68%;font-size:8rem;opacity:0.18;transform:rotate(-15deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:63%;left:25%;font-size:7rem;opacity:0.16;transform:rotate(40deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:76%;left:52%;font-size:11rem;opacity:0.13;transform:rotate(-50deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:87%;left:8%;font-size:8rem;opacity:0.19;transform:rotate(20deg);">🐾</span>
+      <span class="auth-paw-scatter" style="top:40%;left:42%;font-size:9rem;opacity:0.12;transform:rotate(-70deg);">🐾</span>
+
+      <div class="auth-branding-content">
+        <a href="{% url 'landing_page' %}" class="auth-logo">
+          <img src="{% static 'image/fmh-logo.png' %}" alt="FMH Logo" class="auth-logo-img">
+          <span>FMHSYNC</span>
+        </a>
+        
+        <a href="{% url 'landing_page' %}" class="auth-home-btn"><i class='bx bx-arrow-back'></i> Return Home</a>
+        
+        <h1>Join FMH Clinic</h1>
+        <p>Create your account and give your pets access to next-generation veterinary care powered by AI technology.</p>
+        
+        <div class="auth-features">
+          <div class="auth-feature">
+            <i class='bx bx-shield-plus'></i>
+            <span>Secure Pet Profiles</span>
+          </div>
+          <div class="auth-feature">
+            <i class='bx bx-bell-ring'></i>
+            <span>Appointment Reminders</span>
+          </div>
+          <div class="auth-feature">
+            <i class='bx bx-report'></i>
+            <span>Health History Access</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Register Form -->
+    <div class="auth-form-section">
+      <div class="auth-form-wrapper">
+        <div class="auth-form-header">
+          <h2>Create Account</h2>
+          <p>Fill in your details to get started</p>
+        </div>
+
+        <form id="registerForm" class="auth-form" novalidate>
+          {% csrf_token %}
+          
+          <div class="auth-form-row">
+            <div class="auth-form-group">
+              <label for="firstName">First Name</label>
+              <div class="auth-input-wrapper">
+                <i class='bx bx-user'></i>
+                <input type="text" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
+              </div>
+            </div>
+
+            <div class="auth-form-group">
+              <label for="lastName">Last Name</label>
+              <div class="auth-input-wrapper">
+                <i class='bx bx-user'></i>
+                <input type="text" id="lastName" name="lastName" placeholder="Last name" required autocomplete="family-name">
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="username">Username</label>
+            <div class="auth-input-wrapper">
+              <i class='bx bx-user-circle'></i>
+              <input type="text" id="username" name="username" placeholder="Create a username" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="regEmail">Email Address</label>
+            <div class="auth-input-wrapper">
+              <i class='bx bx-envelope'></i>
+              <input type="email" id="regEmail" name="email" placeholder="Enter your email" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="phone">Phone Number</label>
+            <div class="auth-input-wrapper">
+              <i class='bx bx-phone'></i>
+              <input type="tel" id="phone" name="phone" placeholder="+63 9XX XXX XXXX" required autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="regPassword">Password</label>
+            <div class="auth-input-wrapper">
+              <i class='bx bx-lock-alt'></i>
+              <input type="password" id="regPassword" name="password" placeholder="Create a password" required autocomplete="new-password">
+              <button type="button" class="password-toggle" data-target="regPassword" aria-label="Toggle password visibility">
+                <i class='bx bx-hide'></i>
+              </button>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar"><span></span></div>
+              <span class="strength-text">Password strength</span>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="auth-input-wrapper">
+              <i class='bx bx-lock-alt'></i>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required autocomplete="new-password">
+              <button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Toggle password visibility">
+                <i class='bx bx-hide'></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-form-options">
+            <label class="auth-checkbox">
+              <input type="checkbox" name="terms" required>
+              <span class="checkmark"></span>
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg auth-submit">
+            <span>Create Account</span>
+            <i class='bx bx-right-arrow-alt'></i>
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          <p>Already have an account? <a href="{% url 'login_page' %}">Sign In</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Password toggle for multiple buttons
+  const passwordToggles = document.querySelectorAll('.password-toggle');
+  passwordToggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      const icon = this.querySelector('i');
+      
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bx-hide');
+        icon.classList.add('bx-show');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('bx-show');
+        icon.classList.add('bx-hide');
+      }
+    });
+  });
+
+  // Password strength indicator
+  const passwordInput = document.getElementById('regPassword');
+  const strengthBar = document.querySelector('.strength-bar span');
+  const strengthText = document.querySelector('.strength-text');
+
+  if (passwordInput) {
+    passwordInput.addEventListener('input', function() {
+      const password = this.value;
+      let strength = 0;
+      
+      if (password.length >= 8) strength += 25;
+      if (/[A-Z]/.test(password)) strength += 25;
+      if (/[0-9]/.test(password)) strength += 25;
+      if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+      strengthBar.style.width = strength + '%';
+      
+      if (strength <= 25) {
+        strengthBar.style.background = '#e63946';
+        strengthText.textContent = 'Weak';
+        strengthText.style.color = '#e63946';
+      } else if (strength <= 50) {
+        strengthBar.style.background = '#f4a261';
+        strengthText.textContent = 'Fair';
+        strengthText.style.color = '#f4a261';
+      } else if (strength <= 75) {
+        strengthBar.style.background = '#2a9d8f';
+        strengthText.textContent = 'Good';
+        strengthText.style.color = '#2a9d8f';
+      } else {
+        strengthBar.style.background = '#009688';
+        strengthText.textContent = 'Strong';
+        strengthText.style.color = '#009688';
+      }
+    });
+  }
+
+  // Form submission
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const username = document.getElementById('username');
+      const email = document.getElementById('regEmail');
+      const phone = document.getElementById('phone');
+      const password = document.getElementById('regPassword');
+      const confirmPassword = document.getElementById('confirmPassword');
+      const terms = registerForm.querySelector('input[name="terms"]');
+      let hasError = false;
+
+      // Clear previous errors
+      document.querySelectorAll('.auth-error').forEach(el => el.remove());
+      document.querySelectorAll('.auth-input-wrapper.error').forEach(el => el.classList.remove('error'));
+
+      if (!firstName.value.trim()) {
+        showError(firstName, 'First name is required');
+        hasError = true;
+      }
+
+      if (!lastName.value.trim()) {
+        showError(lastName, 'Last name is required');
+        hasError = true;
+      }
+
+      if (!username.value.trim()) {
+        showError(username, 'Username is required');
+        hasError = true;
+      }
+
+      if (!email.value.trim()) {
+        showError(email, 'Email is required');
+        hasError = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        showError(email, 'Please enter a valid email');
+        hasError = true;
+      }
+
+      if (!phone.value.trim()) {
+        showError(phone, 'Phone number is required');
+        hasError = true;
+      }
+
+      if (!password.value) {
+        showError(password, 'Password is required');
+        hasError = true;
+      } else if (password.value.length < 8) {
+        showError(password, 'Password must be at least 8 characters');
+        hasError = true;
+      }
+
+      if (!confirmPassword.value) {
+        showError(confirmPassword, 'Please confirm your password');
+        hasError = true;
+      } else if (password.value !== confirmPassword.value) {
+        showError(confirmPassword, 'Passwords do not match');
+        hasError = true;
+      }
+
+      if (!terms.checked) {
+        alert('Please agree to the Terms of Service and Privacy Policy');
+        hasError = true;
+      }
+
+      if (!hasError) {
+        // Add loading state
+        const submitBtn = registerForm.querySelector('.auth-submit');
+        submitBtn.classList.add('loading');
+        submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Creating Account...';
+        
+        // Simulate registration (replace with actual backend call)
+        setTimeout(() => {
+          alert('Registration functionality will be connected to backend');
+          submitBtn.classList.remove('loading');
+          submitBtn.innerHTML = '<span>Create Account</span><i class="bx bx-right-arrow-alt"></i>';
+        }, 1500);
+      }
+    });
+  }
+
+  function showError(input, message) {
+    const wrapper = input.closest('.auth-input-wrapper');
+    wrapper.classList.add('error');
+    const error = document.createElement('span');
+    error.className = 'auth-error';
+    error.textContent = message;
+    wrapper.parentNode.appendChild(error);
+  }
+});
+</script>
+
+{% endblock %}

@@ -37,8 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'frontend',
+
+    # Project apps
+    'landing',
     'accounts',
+    'branches',
+    'patients',
+    'appointments',
+    'records',
+    'inventory',
+    'billing',
+    'diagnostics',
+    'employees',
+    'notifications',
+    'reports',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +138,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/dashboard/'
+AUTH_USER_MODEL = 'accounts.User'
+
