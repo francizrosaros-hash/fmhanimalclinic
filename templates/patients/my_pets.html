@@ -1,0 +1,129 @@
+{% extends 'base/portal_user.html' %}
+
+{% block title %}My Pets{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div>
+    <h1>My Pets</h1>
+    <p class="page-subtitle">Manage your registered fur babies 🐾</p>
+  </div>
+  <div class="page-header-actions">
+    <a href="{% url 'patients:add_pet' %}" class="btn-action primary">
+      <i class='bx bx-plus-circle'></i> Register Pet
+    </a>
+  </div>
+</div>
+
+{% if pets %}
+<!-- Stats Row -->
+<div class="pets-stats-row">
+  <div class="pets-stat">
+    <span class="pets-stat-count">{{ pets|length }}</span>
+    <span class="pets-stat-label">Total Pets</span>
+  </div>
+</div>
+
+<!-- Pet Cards Grid -->
+<div class="pet-cards-grid">
+  {% for pet in pets %}
+  <div class="pet-card">
+    <!-- Gradient Top Bar -->
+    <div class="pet-card-gradient-bar"></div>
+
+    <!-- Card Content -->
+    <div class="pet-card-content">
+      <!-- Avatar & Name -->
+      <div class="pet-card-top">
+        <div class="pet-avatar">
+          <span>{{ pet.name|make_list|first|upper }}</span>
+        </div>
+        <div class="pet-card-title">
+          <h3 class="pet-name">{{ pet.name }}</h3>
+          <span class="pet-species-tag">{{ pet.species }}</span>
+        </div>
+        <div class="pet-card-actions">
+          <a href="{% url 'patients:edit_pet' pet.pk %}" class="pet-action-btn" title="Edit">
+            <i class='bx bx-edit-alt'></i>
+          </a>
+          <a href="{% url 'patients:delete_pet' pet.pk %}" class="pet-action-btn danger" title="Delete">
+            <i class='bx bx-trash'></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="pet-card-divider"></div>
+
+      <!-- Details Grid -->
+      <div class="pet-info-grid">
+        <div class="pet-info-item">
+          <div class="pet-info-icon"><i class='bx bx-category'></i></div>
+          <div>
+            <span class="pet-info-label">Breed</span>
+            <span class="pet-info-value">{{ pet.breed|default:"—" }}</span>
+          </div>
+        </div>
+        <div class="pet-info-item">
+          <div class="pet-info-icon"><i class='bx bx-time-five'></i></div>
+          <div>
+            <span class="pet-info-label">Age</span>
+            <span class="pet-info-value">{{ pet.age }} yr{{ pet.age|pluralize }}</span>
+          </div>
+        </div>
+        <div class="pet-info-item">
+          <div class="pet-info-icon"><i class='bx bx-male-female'></i></div>
+          <div>
+            <span class="pet-info-label">Sex</span>
+            <span class="pet-info-value">{{ pet.get_sex_display }}</span>
+          </div>
+        </div>
+        <div class="pet-info-item">
+          <div class="pet-info-icon"><i class='bx bx-palette'></i></div>
+          <div>
+            <span class="pet-info-label">Color</span>
+            <span class="pet-info-value">{{ pet.color|default:"—" }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<!-- Modern Empty State -->
+<div class="pets-empty-hero">
+  <div class="pets-empty-visual">
+    <div class="pets-empty-ring ring-1"></div>
+    <div class="pets-empty-ring ring-2"></div>
+    <div class="pets-empty-ring ring-3"></div>
+    <div class="pets-empty-center-icon">
+      <i class='bx bx-paw'></i>
+    </div>
+  </div>
+  <h2>No pets registered yet</h2>
+  <p>Register your furry, feathery, or scaly friends to keep<br>track of their health, appointments, and vaccinations.</p>
+  <a href="{% url 'patients:add_pet' %}" class="pets-empty-cta">
+    <i class='bx bx-plus-circle'></i> Register Your First Pet
+  </a>
+  <div class="pets-empty-features">
+    <div class="pets-empty-feature">
+      <i class='bx bx-calendar-check'></i>
+      <span>Track appointments</span>
+    </div>
+    <div class="pets-empty-feature">
+      <i class='bx bx-file'></i>
+      <span>Medical records</span>
+    </div>
+    <div class="pets-empty-feature">
+      <i class='bx bx-injection'></i>
+      <span>Vaccination logs</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

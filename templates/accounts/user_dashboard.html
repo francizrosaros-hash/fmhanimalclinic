@@ -1,0 +1,138 @@
+{% extends 'base/portal_user.html' %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- No Branch Warning Banner -->
+{% if not user.branch %}
+<div class="dashboard-alert warning">
+  <div class="dashboard-alert-icon">
+    <i class='bx bx-error-circle'></i>
+  </div>
+  <div class="dashboard-alert-content">
+    <strong>No clinic branch selected</strong>
+    <p>You haven't selected a clinic branch yet. Please select one to book appointments and access clinic services.</p>
+  </div>
+  <a href="{% url 'select_branch' %}" class="dashboard-alert-action">Select Branch <i class='bx bx-right-arrow-alt'></i></a>
+</div>
+{% endif %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    {% if user.branch %}
+    <span class="branch-badge">
+      <i class='bx bx-map-pin'></i> {{ user.branch.name }} — {{ user.branch.city }}
+    </span>
+    {% endif %}
+  </div>
+  <div class="page-header-actions">
+    <a href="#" class="btn-action primary"><i class='bx bx-calendar-plus'></i> Book Appointment</a>
+    <a href="{% url 'patients:add_pet' %}" class="btn-action outline"><i class='bx bx-plus-circle'></i> Register Pet</a>
+  </div>
+</div>
+
+<!-- Stat Cards -->
+<div class="stats-grid">
+  <div class="stat-card teal">
+    <div class="stat-icon-bg"><i class='bx bxs-dog'></i></div>
+    <div class="stat-label"><i class='bx bxs-dog'></i> My Pets</div>
+    <div class="stat-value">0</div>
+    <div class="stat-sub">registered pets</div>
+  </div>
+  <div class="stat-card blue">
+    <div class="stat-icon-bg"><i class='bx bxs-calendar-check'></i></div>
+    <div class="stat-label"><i class='bx bx-calendar-check'></i> Upcoming Appointments</div>
+    <div class="stat-value">0</div>
+    <div class="stat-sub">scheduled this week</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-icon-bg"><i class='bx bxs-injection'></i></div>
+    <div class="stat-label"><i class='bx bx-injection'></i> Pending Vaccinations</div>
+    <div class="stat-value">0</div>
+    <div class="stat-sub">needs attention</div>
+  </div>
+  <div class="stat-card purple">
+    <div class="stat-icon-bg"><i class='bx bxs-bell-ring'></i></div>
+    <div class="stat-label"><i class='bx bx-bell'></i> Notifications</div>
+    <div class="stat-value">0</div>
+    <div class="stat-sub">unread</div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="dashboard-card full-width" style="margin-bottom: 14px;">
+  <div class="card-header">
+    <h3><i class='bx bxs-zap'></i> Quick Actions</h3>
+  </div>
+  <div class="card-body">
+    <div class="quick-actions">
+      <a href="#" class="quick-action-btn">
+        <i class='bx bx-calendar-plus'></i>
+        Book Appointment
+      </a>
+      <a href="#" class="quick-action-btn">
+        <i class='bx bx-plus-circle'></i>
+        Register Pet
+      </a>
+      <a href="#" class="quick-action-btn">
+        <i class='bx bx-file'></i>
+        View Records
+      </a>
+      <a href="#" class="quick-action-btn">
+        <i class='bx bx-cart'></i>
+        Browse Catalog
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Content Grid -->
+<div class="dashboard-grid">
+  <div class="dashboard-card">
+    <div class="card-header">
+      <h3><i class='bx bxs-calendar'></i> Upcoming Appointments</h3>
+      <a href="#" class="card-action">View All</a>
+    </div>
+    <div class="card-body">
+      <div class="empty-state">
+        <i class='bx bx-calendar-x'></i>
+        <h4>No upcoming appointments</h4>
+        <p>Book your first appointment to get started.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-header">
+      <h3><i class='bx bxs-file-doc'></i> Recent Medical Records</h3>
+      <a href="#" class="card-action">View All</a>
+    </div>
+    <div class="card-body">
+      <div class="empty-state">
+        <i class='bx bx-file-blank'></i>
+        <h4>No records yet</h4>
+        <p>Records appear after your pet's first visit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vaccination Schedule -->
+<div class="dashboard-card full-width">
+  <div class="card-header">
+    <h3><i class='bx bxs-injection'></i> Vaccination Schedule</h3>
+    <a href="#" class="card-action">View All</a>
+  </div>
+  <div class="card-body">
+    <div class="empty-state">
+      <i class='bx bx-shield-quarter'></i>
+      <h4>No pending vaccinations</h4>
+      <p>Your pets' vaccination schedules will appear here.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

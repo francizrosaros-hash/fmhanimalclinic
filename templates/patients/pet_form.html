@@ -1,0 +1,53 @@
+{% extends 'base/portal_user.html' %}
+
+{% block title %}{{ action }} Pet{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div>
+    <h1>{{ action }} Pet</h1>
+    <p class="page-subtitle">
+      {% if action == 'Register' %}Add a new furry friend to your family 🐾{% else %}Update {{ pet.name }}'s information{% endif %}
+    </p>
+  </div>
+  <div class="page-header-actions">
+    <a href="{% url 'patients:my_pets' %}" class="btn-action outline">
+      <i class='bx bx-arrow-back'></i> Back to My Pets
+    </a>
+  </div>
+</div>
+
+<!-- Pet Form Card -->
+<div class="dashboard-card full-width">
+  <div class="card-header">
+    <h3><i class='bx bx-paw'></i> Pet Information</h3>
+  </div>
+  <div class="card-body">
+    <form method="POST" class="pet-form">
+      {% csrf_token %}
+
+      <div class="form-grid">
+        {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <span class="form-error">{{ field.errors.0 }}</span>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-action primary">
+          <i class='bx bx-check'></i> {{ action }} Pet
+        </button>
+        <a href="{% url 'patients:my_pets' %}" class="btn-action outline">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
